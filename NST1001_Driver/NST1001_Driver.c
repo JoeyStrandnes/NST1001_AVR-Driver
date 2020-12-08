@@ -2,9 +2,6 @@
  * Add Fahrenheit and Kelvin
  * Add Pulldown mode and "Multicast" mode
  */
-
-
-
 #include "NST1001_Driver.h"
 
 /*  Setup counter 1/ 16-bit timer
@@ -27,16 +24,17 @@ void Counter_Setup(){
 
 // Conversion period = 24 ms typ
 // Communication period = 26ms typ
-float Get_Temp(){
+float Get_Temp(uint8_t TEMP_UNIT){
 
   float Temp = 0;
-
-  EN_PORT |= (1 << EN_PIN);         // Enable pin
+  uint8_t Unit = TEMP_UNIT;
+  
+  EN_PORT = (1 << EN_PIN);         // Enable pin
   
   TCNT1 = 0;
   
   _delay_ms(50);                    // Conversion delay
-  EN_PORT &= (0 << EN_PIN);         // TESTING ON PD2 Turning the sensor off
+  EN_PORT = (0 << EN_PIN);         // Turning the sensor off
   
   Temp = ((TCNT1*0.0625) - 50.0625);
 
@@ -44,12 +42,32 @@ float Get_Temp(){
   if(Temp < 30){
     Temp += ((Temp-30)*0.005);      // Compensatio for T < 30
   }
-  if (100 < Temp && Temp < 150){
+  else if (100 < Temp && Temp < 150){
     Temp += ((100-Temp)*0.012);     // Compensatio for 100 < T < 150
   }
-  if(Temp < -50 || Temp > 150){     // Sanity check
+  else if(Temp < -50 || Temp > 150){     // Sanity check
     Temp = 32500;
   }
+
+//Changing uint, defaults to Celsius: 1 = Fahrenheit, 2 = Kelvin
+  if(TEMP_UNIT == 1){
+    Temp = ((Temp*1.8)+32);
+  }
+  else if(TEMP_UNIT == 2){
+    Temp += 273.15;
+  }
+/*
+  switch(Unit){
+    case 1: // Fahrenheit
+      Temp = ((Temp*1.8)+32);
+      break;
+    case 2: // Kelvin
+      Temp += 273.15;
+      break;
+      
+    //default:
+  }
+*/  
   
   return Temp;
 }

@@ -11,6 +11,6 @@
 #define EN_PIN  PB0
 
 void Counter_Setup();
-float Get_Temp();
+float Get_Temp(uint8_t TEMP_UNIT);
 
 #endif
