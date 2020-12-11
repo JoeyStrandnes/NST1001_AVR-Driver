@@ -6,11 +6,12 @@
 #include <util/delay.h>
 
 // Selecting control/enable pin for sensor
-#define EN_DDR  DDRB
-#define EN_PORT PORTB
-#define EN_PIN  PB0
+#define NST_EN_DDR  DDRB
+#define NST_EN_PORT PORTB
+#define NST_EN_PIN  PB1
 
-void Counter_Setup();
-float Get_Temp(uint8_t TEMP_UNIT);
+void Counter_Setup(uint8_t const Mode);
+float Get_Temp(uint8_t const TEMP_UNIT);
+
 
 #endif

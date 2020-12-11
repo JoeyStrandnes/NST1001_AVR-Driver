@@ -13,10 +13,8 @@
 ### Supported modes of operation
 
 - Pullup mode
-- Pulldown mode (Not yet)
+- Pulldown mode
 - Multicast mode (Not yet)
-
-
 
 ### Pullup mode
 
@@ -28,6 +26,6 @@
 
 ### Known issues
 
-##### Taking rapid measurements or drifting clock. The spikes below are caused by looping the measurement with zero delay, a minimum delay of 1 ms between measurements is required to ensure stability in the system. Instability can also be caused if the system clock significantly drifts.
+##### Taking rapid measurements or drifting clock. The spikes below are caused by looping the measurement with zero delay, a minimum delay of 1ms between measurements is required to ensure stability in the system. Instability can also be caused if the system clock significantly drifts.
 
 ![Timing Error](https://i.imgur.com/08EtMkI.png)
